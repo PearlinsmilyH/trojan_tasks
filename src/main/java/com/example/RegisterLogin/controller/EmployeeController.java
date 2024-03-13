@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/employee")
+@RequestMapping("/auth")
 public class EmployeeController {
 @Autowired
 public EmployeeService employeeService;
-    @PostMapping(path = "/")
+    @PostMapping(path = "/register")
     public String saveEmployee(@RequestBody EmployeeDTO employeeDTO)
     {
         String id = String.valueOf(employeeService.addEmployee(employeeDTO));
