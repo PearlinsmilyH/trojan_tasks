@@ -1,10 +1,9 @@
-package com.example.RegisterLogin.Service.impl;
+package com.example.RegisterLogin.service;
 
-import com.example.RegisterLogin.DTO.EmployeeDTO;
-import com.example.RegisterLogin.DTO.LoginDTO;
-import com.example.RegisterLogin.Entity.Employee;
-import com.example.RegisterLogin.Repo.EmployeeRepo;
-import com.example.RegisterLogin.Service.EmployeeService;
+import com.example.RegisterLogin.dto.EmployeeDTO;
+import com.example.RegisterLogin.dto.LoginDTO;
+import com.example.RegisterLogin.entity.Employee;
+import com.example.RegisterLogin.repository.EmployeeRepository;
 import com.example.RegisterLogin.response.LoginResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,10 +12,10 @@ import java.util.Optional;
 
 
 @Service
-public class EmployeeIMPL implements EmployeeService {
+public class EmployeeImpl implements EmployeeService {
 
     @Autowired
-    private EmployeeRepo employeeRepo;
+    private EmployeeRepository employeeRepo;
 
 
     @Override

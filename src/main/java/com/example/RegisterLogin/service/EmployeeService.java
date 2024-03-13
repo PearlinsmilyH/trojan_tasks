@@ -1,10 +1,8 @@
-package com.example.RegisterLogin.Service;
+package com.example.RegisterLogin.service;
 
-import com.example.RegisterLogin.DTO.EmployeeDTO;
-import com.example.RegisterLogin.DTO.LoginDTO;
+import com.example.RegisterLogin.dto.EmployeeDTO;
+import com.example.RegisterLogin.dto.LoginDTO;
 import com.example.RegisterLogin.response.LoginResponse;
-import org.springframework.stereotype.Service;
-
 
 
 public interface EmployeeService {

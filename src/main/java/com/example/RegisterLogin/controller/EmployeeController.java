@@ -1,9 +1,9 @@
-package com.example.RegisterLogin.EmployeeController;
+package com.example.RegisterLogin.controller;
 
-import com.example.RegisterLogin.DTO.EmployeeDTO;
-import com.example.RegisterLogin.DTO.LoginDTO;
-import com.example.RegisterLogin.Service.EmployeeService;
+import com.example.RegisterLogin.dto.EmployeeDTO;
+import com.example.RegisterLogin.dto.LoginDTO;
 import com.example.RegisterLogin.response.LoginResponse;
+import com.example.RegisterLogin.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class EmployeeController {
 @Autowired
 public EmployeeService employeeService;
-    @PostMapping(path = "/save")
+    @PostMapping(path = "/")
     public String saveEmployee(@RequestBody EmployeeDTO employeeDTO)
     {
         String id = String.valueOf(employeeService.addEmployee(employeeDTO));

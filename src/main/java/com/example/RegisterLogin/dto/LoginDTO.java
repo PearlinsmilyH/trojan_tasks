@@ -1,4 +1,4 @@
-package com.example.RegisterLogin.DTO;
+package com.example.RegisterLogin.dto;
 
 public class LoginDTO {
 

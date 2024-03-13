@@ -1,4 +1,4 @@
-package com.example.RegisterLogin.Entity;
+package com.example.RegisterLogin.entity;
 
 import jakarta.persistence.*;
 
@@ -6,16 +6,16 @@ import jakarta.persistence.*;
 @Table(name="employee")
 public class Employee {
     @Id
-    @Column(name="employee_id", length = 45)
+    @Column(name="id", length = 45)
     @GeneratedValue(strategy =  GenerationType.AUTO)
-    private int employeeid;
+    private int employeeId;
     @Column(name="email", length = 255)
     private String email;
-    @Column(name="Password", length = 255)
+    @Column(name="password", length = 255)
     private String password;
 
-    public Employee(int employeeid, String email, String password) {
-        this.employeeid = employeeid;
+    public Employee(int employeeId, String email, String password) {
+        this.employeeId = employeeId;
         this.email = email;
         this.password = password;
     }
@@ -24,17 +24,17 @@ public class Employee {
     }
 
     public Employee(int employeeId, String email) {
-        this.employeeid = employeeId;
+        this.employeeId = employeeId;
         this.email = email;
     }
 
 
     public int getEmployeeid() {
-        return employeeid;
+        return employeeId;
     }
 
     public void setEmployeeid(int employeeid) {
-        this.employeeid = employeeid;
+        this.employeeId = employeeid;
     }
 
     public String getEmail() {
@@ -56,7 +56,7 @@ public class Employee {
     @Override
     public String toString() {
         return "Employee{" +
-                "employeeid=" + employeeid +
+                "employeeid=" + employeeId +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';

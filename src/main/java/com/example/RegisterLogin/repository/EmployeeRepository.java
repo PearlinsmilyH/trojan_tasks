@@ -1,7 +1,7 @@
-package com.example.RegisterLogin.Repo;
+package com.example.RegisterLogin.repository;
 
 
-import com.example.RegisterLogin.Entity.Employee;
+import com.example.RegisterLogin.entity.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Repository;
@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @EnableJpaRepositories
 @Repository
-public interface EmployeeRepo extends JpaRepository<Employee, String> {
+public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     Employee findByEmail(String email);
 
     Optional<Employee> findOneByEmailAndPassword(String email, String password);

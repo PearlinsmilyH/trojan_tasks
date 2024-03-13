@@ -1,17 +1,12 @@
-package com.example.RegisterLogin.DTO;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+package com.example.RegisterLogin.dto;
 
 public class EmployeeDTO {
-    private int employeeid;
+    private int employeeId;
     private String email;
     private String password;
 
-    public EmployeeDTO(int employeeid, String email, String password) {
-        this.employeeid = employeeid;
+    public EmployeeDTO(int employeeId, String email, String password) {
+        this.employeeId = employeeId;
         this.email = email;
         this.password = password;
     }
@@ -20,11 +15,11 @@ public class EmployeeDTO {
     }
 
     public int getEmployeeid() {
-        return employeeid;
+        return employeeId;
     }
 
     public void setEmployeeid(int employeeid) {
-        this.employeeid = employeeid;
+        this.employeeId = employeeid;
     }
 
     public String getEmail() {
@@ -46,7 +41,7 @@ public class EmployeeDTO {
     @Override
     public String toString() {
         return "EmployeeDTO{" +
-                "employeeid=" + employeeid +
+                "employeeid=" + employeeId +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
