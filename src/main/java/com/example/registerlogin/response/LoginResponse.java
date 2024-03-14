@@ -1,4 +1,4 @@
-package com.example.RegisterLogin.response;
+package com.example.registerlogin.response;
 
 public class LoginResponse {
     String message;
@@ -7,8 +7,12 @@ public class LoginResponse {
     public LoginResponse(String message, Boolean status) {
         this.message = message;
         this.status = status;
+
     }
     public LoginResponse() {
+    }
+
+    public LoginResponse(String loginSuccessful, boolean b, String token) {
     }
 
     public String getMessage() {

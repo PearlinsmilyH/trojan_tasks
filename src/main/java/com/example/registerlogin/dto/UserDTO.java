@@ -1,38 +1,26 @@
-package com.example.RegisterLogin.dto;
-
-public class LoginDTO {
-
+package com.example.registerlogin.dto;
+public class UserDTO {
     private String email;
     private String password;
-
-    public LoginDTO(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
-
-    public LoginDTO() {
+    public UserDTO() {
     }
 
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
-
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }
-
     @Override
     public String toString() {
-        return "LoginDTO{" +
-                "email='" + email + '\'' +
+        return "EmployeeDTO{" +
+                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

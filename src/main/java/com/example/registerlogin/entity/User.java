@@ -1,10 +1,9 @@
-package com.example.RegisterLogin.entity;
+package com.example.registerlogin.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
-@Table(name="employee")
-public class Employee {
+public class User {
     @Id
     @Column(name="id", length = 45)
     @GeneratedValue(strategy =  GenerationType.AUTO)
@@ -14,18 +13,23 @@ public class Employee {
     @Column(name="password", length = 255)
     private String password;
 
-    public Employee(int employeeId, String email, String password) {
+    public User(int employeeId, String email, String password) {
         this.employeeId = employeeId;
         this.email = email;
         this.password = password;
     }
 
-    public Employee() {
+    public User() {
     }
 
-    public Employee(int employeeId, String email) {
+    public User(int employeeId, String email) {
         this.employeeId = employeeId;
         this.email = email;
+    }
+
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
     }
 
 
