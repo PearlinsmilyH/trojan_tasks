@@ -26,9 +26,11 @@ dependencies {
 	implementation 'org.jetbrains:annotations:24.0.0'
 	compileOnly 'org.projectlombok:lombok:1.18.26'
 	annotationProcessor 'org.projectlombok:lombok:1.18.26'
+	implementation 'javax.validation:validation-api:2.0.0.Final'
+	//implementation 'jakarta.validation:jakarta.validation-api:3.0.0'
+	//implementation group: 'jakarta.validation', name: 'jakarta.validation-api', version: '3.1.0-M1'
 
 }
-
 tasks.named('test') {
 	useJUnitPlatform()
 }

@@ -6,74 +6,67 @@ import com.example.registerlogin.entity.RequestEntity;
 import com.example.registerlogin.repository.ProjectRepository;
 import com.example.registerlogin.repository.RequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import java.util.*;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 public class RequestImpl implements RequestService {
+
     @Autowired
     private RequestRepository requestRepository;
 
     @Autowired
     private ProjectRepository projectRepository;
-    @Override
-    public RequestEntity createRequest(RequestDTO requestDTO) {
-        RequestEntity request = new RequestEntity(
-                requestDTO.getProjectId(),
-                requestDTO.getRequisitionNote(),
-                requestDTO.getEquipmentType(),
-                requestDTO.getShift(),
-                requestDTO.isFuel(),
-                requestDTO.isDriver(),
-                requestDTO.isOperator(),
-                requestDTO.getDurationFrom(),
-                requestDTO.getDurationTo(),
-                requestDTO.getProjectId()
-        );
-        requestRepository.save(request);
-        String s = "success";
-        return request;
 
+    @Override
+    public RequestEntity createRequest(RequestDTO requestDTO)throws Exception {
+        RequestEntity requestEntity = new RequestEntity(requestDTO);
+        return requestRepository.save(requestEntity);
     }
     @Override
     public Optional<RequestEntity> getRequestById(Long id) {
         return requestRepository.findById(id);
     }
-//    @Override
-//    public List<RequestEntity> getRequest() {
-//        return requestRepository.findAll();
-//    }
-
-    public List<RequestDTO> getRequestWithProjectName() {
-        List<RequestEntity> requestEntities = requestRepository.findAll();
-        return requestEntities.stream()
-                .map(requestEntity -> {
-                    RequestDTO requestDTO = new RequestDTO();
-                    requestDTO.setId(requestEntity.getId());
-                    requestDTO.setRequisitionNote(requestEntity.getRequisitionNote());
-                    requestDTO.setEquipmentType(requestEntity.getEquipmentType());
-                    requestDTO.setShift(requestEntity.getShift());
-                    requestDTO.setFuel(requestEntity.isFuel());
-                    requestDTO.setDriver(requestEntity.isDriver());
-                    requestDTO.setOperator(requestEntity.isOperator());
-                    requestDTO.setDurationFrom(requestEntity.getDurationFrom());
-                    requestDTO.setDurationTo(requestEntity.getDurationTo());
-                    requestDTO.setProjectId(requestEntity.getProjectId());
-                    requestDTO.setCreated(requestEntity.getCreated());
-                    String projectName = fetchProjectName(requestEntity.getProjectId());
-                    requestDTO.setProjectName(projectName);
-                    return requestDTO;
-                })
-                .collect(Collectors.toList());
+    @Override
+    public List<RequestDTO> getAllRequests() {
+        List<RequestEntity> requests = requestRepository.findAll();
+        Set<Long> projectIds = requests.stream()
+                .map(RequestEntity::getProjectId)
+                .collect(Collectors.toSet());
+        //which removes duplicate projectid from requests and store only unigue projectid
+        Map<Long, String> projectNamesMap = fetchProjectNames(projectIds);//store as key and value here
+        return mapToRequestDTOs(requests, projectNamesMap);
     }
-
-    private String fetchProjectName(Long projectId) {
-        ProjectEntity projectEntity = projectRepository.findById(projectId).orElse(null);
-        return projectEntity != null ? projectEntity.getProjectName() : null;
+    private Map<Long, String> fetchProjectNames(Set<Long> projectIds) {
+        //find all projects with projectid
+        List<ProjectEntity> projects = projectRepository.findAllByIdIn(projectIds);
+        //convert the projects as map
+        return projects.stream()
+                .collect(Collectors.toMap(ProjectEntity::getId, ProjectEntity::getProjectName));
     }
-
+    private List<RequestDTO> mapToRequestDTOs(List<RequestEntity> requests, Map<Long, String> projectNamesMap) {
+      //  itterate the requests to store the project name
+        List<RequestDTO> dtos = new ArrayList<>();
+        for (RequestEntity request : requests) {
+            RequestDTO dto = new RequestDTO();
+            dto.setId(request.getId());
+            dto.setRequisitionNote(request.getRequisitionNote());
+            dto.setEquipmentType(request.getEquipmentType());
+            dto.setShift(request.getShift());
+            dto.setFuel(request.isFuel());
+            dto.setDriver(request.isDriver());
+            dto.setOperator(request.isOperator());
+            dto.setDurationFrom(request.getDurationFrom());
+            dto.setDurationTo(request.getDurationTo());
+            dto.setProjectId(request.getProjectId());
+            dto.setProjectName(projectNamesMap.get(request.getProjectId()));//get the projectname from projectnamemap using projectid
+            dto.setCreated(request.getCreated());
+            dtos.add(dto);
+        }
+        return dtos;
+    }
 }
